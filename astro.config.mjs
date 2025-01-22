@@ -3,7 +3,8 @@ import storyblok from '@storyblok/astro'
 import { loadEnv } from 'vite'
 import tailwind from '@astrojs/tailwind'
 import basicSsl from '@vitejs/plugin-basic-ssl'
-import react from '@astrojs/react';
+import react from '@astrojs/react'
+import vercel from '@astrojs/vercel';
 const env = loadEnv("", process.cwd(), 'STORYBLOK')
 
 // https://astro.build/config
@@ -22,10 +23,13 @@ export default defineConfig({
       region: 'us',
     },
   }), tailwind(), react()],
+
   vite: {
     plugins: [basicSsl()],
     server: {
       https: true,
     },
   },
+
+  adapter: vercel(),
 });

@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/react": "^4.1.6",
     "@astrojs/tailwind": "^5.1.5",
+    "@astrojs/vercel": "^8.0.3",
     "@storyblok/astro": "^5.1.2",
     "@storyblok/richtext": "^3.0.2",
     "@types/clone-deep": "^4.0.4",
