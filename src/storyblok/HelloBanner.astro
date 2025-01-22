@@ -1,0 +1,31 @@
+---
+import { RichTextSchema, storyblokEditable, renderRichText } from '@storyblok/astro'
+import cloneDeep from 'clone-deep'
+
+const titleSchema = cloneDeep(RichTextSchema)
+const { blok } = Astro.props
+const renderedTitle = renderRichText(blok.title, {
+  schema: titleSchema,
+  resolver: (component, blok) => {
+    console.log(component)
+  },
+})
+---
+
+<div {...storyblokEditable(blok)}>
+  <div class="container mx-auto my-24 md:flex gap-10 items-center">
+    <div class="relative basis-2/3 max-w-[500px]">
+      <img
+        class="rounded-full aspect-square object-cover"
+        src={blok.image.filename}
+        alt={blok.image.alt}
+        class="w-full h-48 xl:h-72 object-cover"
+      />
+      <div class="flex items-center justify-center relative animate-wave text-7xl w-24 h-24 mt-[-100px] ml-10 origin-bottom-right">
+        👋
+        <span class="absolute bg-white w-full h-full z-[-1] rounded-full" />
+      </div>
+    </div>
+    <div set:html={renderedTitle}></div>
+  </div>
+</div>
