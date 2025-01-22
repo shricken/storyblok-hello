@@ -3,39 +3,19 @@ import RichTextRenderer from "storyblok-rich-text-astro-renderer/RichTextRendere
 import type { RichTextType } from "storyblok-rich-text-astro-renderer"
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro"
 
-import { storyblokEditable, renderRichText } from '@storyblok/astro'
-import BannerBlob from '../components/BannerBlob.jsx'
+import { storyblokEditable } from '@storyblok/astro'
 
 export interface Props {
   blok: {
-    title: RichTextType,
-    image: {
-      filename: string,
-      alt: string,
-    },
+    text: RichTextType,
   };
 }
 const { blok } = Astro.props
 ---
 
-<div class="relative" {...storyblokEditable(blok)}>
-  <div class="absolute top-0 z-10 right-0 bottom-0 left-0 backdrop-blur-xl" />
-  <div class="container relative z-10 mx-auto my-24 md:flex gap-10 items-center text-center md:text-left">
-    <div class="relative basis-2/3 max-w-[500px] mx-auto mb-20">
-      <img
-        class="rounded-full aspect-square object-cover"
-        src={blok.image.filename}
-        alt={blok.image.alt}
-        class="w-full h-48 xl:h-72 object-cover"
-      />
-      <div class="flex w-16 h-16 md:w-24 md:h-24 items-center justify-center absolute mt-[-100px] ml-10">
-        <span class="absolute bg-white w-full h-full z-10 rounded-full" />
-        <div class="relative z-10 animate-wave text-5xl md:text-7xl w-12 h-12 md:w-20 md:h-20 origin-bottom-right">👋</div>
-      </div>
-    </div>
-    <!-- <div set:html={renderedTitle}></div> -->
+<div class="container mx-auto" {...storyblokEditable(blok)}>
     <RichTextRenderer
-      content={blok.title}
+      content={blok.text}
       schema={{
         nodes: {
           heading: ({ attrs: { level } }) => ({
@@ -77,9 +57,4 @@ const { blok } = Astro.props
       }}
       {...storyblokEditable(blok)}
     />
-  </div>
-  <div class="absolute z-0 top-[5%] bottom-[8%] left-[5%] right-[10%]">
-    <BannerBlob color="light-brick" client:load />
-    <BannerBlob color="light-amber" client:load />
-  </div>
 </div>
