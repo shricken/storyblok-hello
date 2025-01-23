@@ -13,7 +13,7 @@ export interface Props {
 const { blok } = Astro.props
 ---
 
-<div class="container mx-auto" {...storyblokEditable(blok)}>
+<div class="container px-12 md:px-0 mx-auto" {...storyblokEditable(blok)}>
     <RichTextRenderer
       content={blok.text}
       schema={{
